@@ -44,7 +44,7 @@ import (
 	"math"
 )
 
-/* Podemos invocar la función Println del paquete main porque ha sido exportada. 
+/* Podemos invocar la función Println del paquete main porque ha sido exportada.
 En cambio, no podremos acceder a la variable pi del paquete math */
 func main(){
 	fmt.Println(math.pi)
@@ -361,11 +361,56 @@ func main() {
 }
 ```
 
+## Memoria y Punteros
+
+Cuando se declara una variable y se le asigna un valor, Go asigna una cantidad de memoria RAM para almacenarla, dependiendo dicha cantidad de memoria del tipo de datos empleado.
+
+Esa memoria tiene una *dirección de memoria* (representada mediante código hexadecimal) que permite a Go encontrar el valor de la variable cuando lo necesita.
+
+Para acceder a la dirección de memoria de una variable Go dispone del operador `&`, que se utiliza delante del nombre de la variable
+
+```golang
+i := 20
+fmt.Println(&i) // prints 0xc000100010
+```
+
+Un **puntero** es una variable que apunta a la dirección de memoria de otra variable.
+La sintaxis para crear un puntero es:
+
+```golang
+var p *Type //Type = tipo de datos de la variable a la que apunta
+```
+
+El valor de un puntero que no ha sido inicializado es `nil`, ya que no está apuntando a ningún valor de la RAM en ese momento.
+
+Para acceder al valor de la variable a la que apunta el puntero tenemos que usar el operador `*`, conocido como **operador de indirección**.
+
+```golang
+a := 7
+pa := &a // Go infiere el tipo *int para "pa"
+
+fmt.Printf("El dato que hay en %v es %v\n", pa, *pa)
+```
+
+### Función new()
+
+La función `new()` reserva memoria y devuelve un puntero a esa dirección de memoria. Esta función recibe como argumento el tipo de dato que se quiere almacenar, procede a la asignación de memoria, escribe el valor por defecto del tipo en esa dirección de memoria y devuelve el puntero.
+
+```golang
+package main
+
+import "fmt"
+
+func main(){
+	pa := new(int)
+
+	fmt.Printf("El dato que hay en %v es %v\n", pa, *pa)
+}
+```
+
 ## Aspectos básicos
 
-
 La función main() es el punto de inicio de todo el código, es lo que va a ejecutar el compilador.
-
 
 Para declarar una variable disponemos de dos mecanismos, la declaración explícita y el operador “:=”.
 
@@ -411,7 +456,6 @@ import “math”
 ## Structs
 
 Los `structs` son tipos de datos definidos por el usuario.
-
 
 Más temas a desarrollar:
 
