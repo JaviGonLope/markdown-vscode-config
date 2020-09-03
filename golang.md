@@ -455,7 +455,31 @@ import “math”
 
 ## Structs
 
-Los `structs` son tipos de datos definidos por el usuario.
+Los `structs` son tipos de datos definidos por el usuario. Un `struct` es una colección de campos a los cuales se puede acceder usando un punto.
+
+```golang
+package main
+
+import "fmt"
+
+type Vertex struct {
+	X, Y int
+}
+
+var (
+	v1 = Vertex{1, 2}  // tipo Vertex
+	v2 = Vertex{X: 1}  // Y:0 es implícito
+	v3 = Vertex{}      // X:0 e Y:0
+	p  = &Vertex{1, 2} // tipo *Vertex
+)
+
+func main() {
+	v1.X = 7
+	v2.Y = 20
+	(*p).X = 3 // Por comodidad, también se puede escribir p.X
+	fmt.Println(v1, p, v2, v3)
+}
+```
 
 Más temas a desarrollar:
 
